@@ -3,7 +3,7 @@ const hour      = document.querySelector('#hours');
 const minute    = document.querySelector('#minutes');
 const second    = document.querySelector('#seconds');
 
-const target    = new Date('Jul 25, 2023 12:00:00').getTime();
+const target    = new Date('Jul 19, 2023 00:00:00').getTime();
 
 const countDate = setInterval(() => {
     const now           = new Date().getTime();
