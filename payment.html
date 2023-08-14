@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Bootstrap demo</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="payment.css">
+    </head>
+    <body>
+        <div class="container px-4 pb-2">
+            <div class="thumbnail">
+                <div class="background-thumbnail">
+                    <img src="./image/pernikahan.jpg" class="" alt="" srcset="" />
+                    <h2 class="thumbnail-text">Caca & Herman</h2>
+                </div>
+                <div class="logo-thumbnail">
+                    <img src="./image/logo.jpg" class="" alt="" srcset="" />
+                </div>
+            </div>
+            <div class="card mt-5">
+                <div class="card-body">
+                    <div class="countdown">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120V256c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/></svg>
+                        <span>Bayar dalam</span>
+                        <div class="timer d-inline">
+                            <span id="minutes"></span>
+                            :
+                            <span id="seconds"></span>
+                        </div>
+                    </div>
+                    <div class="qrcode mt-3">
+                        <span class="text-center mb-2">INVOICE : INV/07/22072023</span>
+                        <img src="./image/barcode.png" class="qrcode" width="220" height="220" alt="">
+                        <div class="qr-text">
+                            <img src="./image/qris.png" class="darken" class="d-inline" width="64" height="48" alt="" srcset="">
+                            <small>PINDAI KODE UNTUK MEMBAYAR</small>
+                        </div>
+                    </div>
+                    <div class="ringkasan text-center mb-3">
+                        <span class="btn btn-customs btn-sm mt-4">Ringkasan Pembayaran <svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 512 512"><path d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152V424c0 48.6 39.4 88 88 88H360c48.6 0 88-39.4 88-88V312c0-13.3-10.7-24-24-24s-24 10.7-24 24V424c0 22.1-17.9 40-40 40H88c-22.1 0-40-17.9-40-40V152c0-22.1 17.9-40 40-40H200c13.3 0 24-10.7 24-24s-10.7-24-24-24H88z"/></svg></span>
+                    </div>
+                  <table>
+                    <tr>
+                        <th>Harga</th>
+                        <td>Rp. 250.000,00</td>
+                    </tr>
+                    <tr>
+                        <th>Biaya Layanan & Lainnya <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3h58.3c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24V250.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1H222.6c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"/></svg></th>
+                        <td>Rp 4.000,00</td>
+                    </tr>
+                    <tr>
+                        <th>Total Nominal</th>
+                        <td>Rp. 254.000,00</td>
+                    </tr>
+                  </table>
+                </div>
+            </div>
+
+            <section id="pembayaran" class="mt-5">
+                <h2 class="text-center ">Cara Pembayaran</h2>
+                <ol>
+                    <li>Mencoba tulisan dengan rata tengah tanpa kanan kiri</li>
+                    <li>Mencoba tulisan panjang dengan rata tengah tanpa kanan kiri</li>
+                    <li>Mencoba tulisan dengan rata tengah tanpa kanan kiri</li>
+                    <li>Mencoba panjang kata tulisan dengan rata tengah tanpa kanan kiri</li>
+                </ol>
+            </section>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+               modal qris
+            </button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#notifikasi">
+               modal alert
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="notifikasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="alert alert-light" role="alert">
+                        <img src="./image/verif.png" width="32" height="32" alt="" srcset="">
+                        <span>Pembayaran telah berhasil dilakukan</span>
+                    </div>  
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <img src="./image/pernikahan.jpg" class="object-fit-cover" width="150" height="120" alt="" srcset="">
+                        <span class="header">Pernikahan <br>Burhan & Aminah</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="invoice">
+                            <span class="title">Invoice</span>
+                            <span>INVOICE : INV/07/22072023</span>
+                        </div>
+                        <div class="status">
+                            <span class="title">Status</span>
+                            <img src="./image/verif.png" class="icon" alt="" srcset="">
+                            <span>Pembayaran Berhasil</span>
+                        </div>
+                        <div class="date">
+                            <span class="title">Date</span>
+                            <span>22 Juli, 2023 - 19.30 WIB</span>
+                        </div>
+                        <div class="pricing">
+                            <img src="./image/qris.png" class="darken" width="96" height="56" alt="" srcset="">
+                            <div class="text-pricing">
+                                <span>Total Nominal</span>
+                                <div class="price">
+                                    Rp. 259.000,00
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary">Bagikan</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Kembali</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+                        
+        </div>
+        <footer>
+            <span>Powered by</span>
+        </footer>
+        <script src="count.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>

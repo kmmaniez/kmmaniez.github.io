@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+}
+.container{
+    max-width: 720px;
+}
+.thumbnail {
+    width: 100%;
+    height: max-content;
+    /* background-color: red; */
+}
+.background-thumbnail {
+    position: relative;
+    /* background-color: green; */
+    width: 100%;
+    height: 220px;
+}
+.background-thumbnail::after{
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: inherit;
+    border-radius: 0 0 100px 100px;
+    background-color: rgba(0, 0, 0, 0.227);
+    top: 0;
+}
+.background-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0 0 100px 100px;
+    /* position: relative; */
+}
+.logo-thumbnail {
+    width: 100px;
+    height: 100px;
+    margin: -50px auto 0 auto;
+    position: relative;
+}
+.logo-thumbnail img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0px 8px 25px rgb(223, 223, 223);
+}
+.welcome {
+    margin-top: 16px;
+    text-align: center;
+}
+h3,
+h5 {
+    font-weight: 700;
+}
+.welcome h1 {
+    font-weight: 700;
+}
+.welcome h5 {
+    text-transform: uppercase;
+    margin-top: 16px;
+}
+.content {
+    margin-top: 2.5rem;
+}
+label {
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+textarea{
+    resize: none;
+}
+input.form-control:focus,textarea.form-control:focus{
+    box-shadow: none;
+}
+h2.thumbnail-text{
+    color: #fff;
+    font-weight: 700;
+    width: max-content;
+    height: max-content;
+    position: relative;
+    z-index: 2;
+    margin: -112px auto 0 auto;
+}
+footer{
+    /* width: 100%; */
+    max-width: 720px;
+    height: max-content;
+    position: relative;
+    margin-top: 48px;
+    margin-left: auto;
+    margin-right: auto;
+    bottom: 0;
+    box-shadow: 0px 0px 8px #cdcdcd;
+    display: flex;
+    justify-content: center;
+    padding: 16px 0;
+}
