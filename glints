@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/1a19584ede.js" crossorigin="anonymous"></script>
+</head>
+  <style>
+    #explore{
+        padding: 0;
+    }
+    ul#loker li .nav-link{
+        /* padding: 0; */
+        margin-left: 24px;
+        padding: 2px 0px;
+        /* background-color: #eaeaea; */
+    }
+    ul#loker > li a{
+        position: relative;
+        /* padding: 8px 0 8px 0; */
+        /* padding: 8px 16px 4px 16px; */
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0px;
+    }
+    ul#loker li:nth-child(n+2) a:hover{
+        border-bottom: 2px solid #000;
+    }
+    .card-footer{
+        color: #666666;
+        font-size: 14px;
+    }
+    #searchbtn{
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 14px;
+        padding: 8px;
+        letter-spacing: 1px;
+        background-color: rgb(1, 126, 183);
+    }
+    #searchbtn:hover{
+        box-shadow: 6px 6px 1px rgb(193, 193, 193);
+    }
+    #joblist .card-body p{
+        margin: 4px 0 0 0;
+        font-size: 14px;
+    }
+    #joblist .card{
+        box-shadow: 0px 0px 12px rgb(255, 212, 212);
+    }
+    #joblist .card:hover{
+        cursor: pointer;
+        box-shadow: 0px 0px 8px rgb(255, 224, 224);
+    }
+    #eksplor ul li a.nav-link.active{
+        color: rgb(1, 126, 183);
+        font-weight: bold;
+        border-bottom: 4px solid rgb(1, 126, 183);
+    }
+    input[name="cariloker"]:focus,input[name="carilokasi"]:focus{
+        background-color: rgb(222, 244, 255);
+        /* outline: none; */
+        box-shadow: none;
+    }
+    input[name="cariloker"],input[name="carilokasi"]{
+        background-image: linear-gradient(to left, rgba(145, 182, 202, 0.25), rgb(235, 245, 250) 20%);
+    }
+    #loker{
+        background-color: #fff;
+        z-index: 1;
+    }
+    #eksplor{
+        position: sticky;
+        top: 10px;
+        background-color: rgb(243, 243, 243);
+        /* z-index: 2; */
+        border: 1px solid rgb(181, 181, 181);
+    }
+    .suggested a{
+        font-size: 14px;
+        padding: 4px 16px;
+    }
+    .suggested a:nth-child(n+2){
+        margin-left: 8px;
+    }
+    .suggested a:hover{
+        background-color: rgb(1, 126, 183);
+;
+    }
+    #jobresult .card-body p{
+        margin: 0;
+    }
+    #jobresult .card .card-body .header{
+        position: relative;
+    }
+    #jobresult .card .card-body .header .title-info{
+        position: absolute;
+        right: -30px;
+        top: 0;
+    }
+
+    #lokerinput,#lokasiinput{
+        border-radius: 8px;
+        position: relative;
+        z-index: 0;
+        box-shadow: none;
+        padding-left: 36px;
+        background-image: linear-gradient(to left, rgba(145, 182, 202, 0.25), rgb(235, 245, 250) 20%);
+    }
+    #labelicon{
+        position: absolute;
+        z-index: 1;
+        width: max-content;
+        height: 100%;
+        border: none;
+        background-color: transparent;
+        color: rgb(121, 121, 121);
+    }
+    .accordion{
+        padding: 0 8px;
+        border: 1px solid #eaeaea;
+        border-radius: 4px;
+    }
+    .accordion-item:last-child{
+        border-bottom: none;
+    }
+    .accordion-item:nth-child(1){
+        border-top: none;
+    }
+    .accordion-item{
+        border-left: none;
+        border-right: none;
+    }
+    .accordion-item button:hover{
+        color: rgb(1, 126, 183);
+    }
+    .accordion .accordion-item h2 button{
+        box-shadow: none;
+    }
+    .collapse.show, .accordion .accordion-item .accordion-header button{
+        background-color: transparent;
+    }
+    #jobs{
+        position: relative;
+    }
+    .filterjobs{
+        position: sticky;
+        top: 10rem;
+        left: 0;
+    }
+    footer{
+        background-color: #000;
+    }
+    ul#listfooter li{
+        color: #fff;
+        padding: 8px 0;
+        border: none;
+        background-color: #000;
+    }
+    .info li#lang {
+        list-style-type: none;
+        padding: 0;
+        font-size: 14px;
+    }
+    .info li#lang ul{
+        font-size: 12px;
+        width: 48px;
+        padding: 4px;
+    }
+    .info li#lang ul li a:hover{
+        border-bottom: none;
+    }
+  </style>
+  <body>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg py-3 d-flex bg-white">
+            <div class="container">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center" id="loker">
+                  <li class="nav-item">
+                    <a class="navbar-brand" href="#">
+                        <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="54" height="42">
+                      </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> LOWONGAN KERJA</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> PERUSAHAAN</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> BLOG</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"> EXPERTCLASS</a>
+                  </li>
+
+                  
+          
+                </ul>
+                <div class="info d-flex justify-content-center align-items-center gap-4">
+                    <li class="nav-item dropdown ms-auto" id="lang">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i class="fa-solid fa-globe"></i> ID
+                      </a>
+                      <ul class="dropdown-menu" id="lang">
+                        <li><a class="dropdown-item" href="#">ENGLISH</a></li>
+                        <li><a class="dropdown-item" href="#">INDONESIAN</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-item ms-auto" id="lang">
+                        <a class="nav-link" href="#"><i class="fa-solid fa-bell fa-lg"></i></a>
+                    </li>
+                    <div class="profile d-flex justify-content-center align-items-center gap-2">
+                        <img class="nav-link rounded-pill" src="https://images.glints.com/unsafe/160x160/glints-dashboard.s3.amazonaws.com/profile-picture-default/11.jpg" width="48" height="48" alt="" srcset="">
+                        <li class="nav-item dropdown ms-auto" id="userinfo">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Name</a>
+                            <ul class="dropdown-menu" id="userinfo">
+                              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user"></i> PROFIL SAYA</a></li>
+                              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file"></i> LAMARAN SAYA</a></li>
+                              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-ticket"></i> TIKET SAYA</a></li>
+                              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i> PENGATURAN AKUN</a></li>
+                              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-power-off"></i> KELUAR</a></li>
+                            </ul>
+                          </li>
+                    </div>
+                    
+                </div>
+              </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg" id="eksplor">
+            <div class="container">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#"><i class="fa-solid fa-lightbulb"></i> FOR YOU</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#"><i class="fa-solid fa-compass"></i> EKSPLOR</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#"><i class="fa-solid fa-bookmark"></i> BOOKMARK</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mt-3">
+
+        <!-- SEARCH FORM -->
+        <div class="search-form">
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="lokerinput" id="lokerinput" placeholder="Cari lowongan" aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="input-group-text" id="labelicon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="lokasiinput" id="lokasiinput" placeholder="Tambahkan negara atau kota" aria-label="Username" aria-describedby="basic-addon1">
+                        <span class="input-group-text" id="labelicon"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <button class="btn btn-md btn-primary w-100" id="searchbtn">Cari</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUGGESTED RESULTS -->
+        <div class="suggested mt-3">
+            <a href="#" class="btn btn-outline-secondary rounded-pill">Popular : <strong>Admin</strong></a>
+            <a href="#" class="btn btn-outline-secondary rounded-pill">Popular : <strong>Customer Service</strong></a>
+            <a href="#" class="btn btn-outline-secondary rounded-pill">Popular : <strong>Legal</strong></a>
+            <h5 class="mt-3">3664 Info lowongan kerja di indonesia</h5>
+        </div>
+
+    </div>
+
+    <div class="container" id="jobs">
+        <div class="row">
+            <!-- FILTER JOBS -->
+            <div class="col-lg-3">
+                <div class="filterjobs">
+                    <div class="accordion" id="accordionExample">
+
+                        <!-- TAMPILKAN BERDASAR -->
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                               Tampilkan Berdasarkan
+                            </button>
+                          </h2>
+                          <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <input type="checkbox" class="btn-check" id="btn-check-outlined" autocomplete="off">
+                                <label class="btn btn-outline-primary rounded-pill" for="btn-check-outlined">Paling sesuai</label>
+
+                                <input type="checkbox" class="btn-check" id="btn-check-2-outlined" checked autocomplete="off">
+                                <label class="btn btn-outline-link rounded-pill" for="btn-check-2-outlined">Paling baru</label><br>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- TIPE PEKERJAAN -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTipepekerjaan" aria-expanded="false" aria-controls="collapseTipepekerjaan">
+                                 TIpe Pekerjaan
+                              </button>
+                            </h2>
+                            <div id="collapseTipepekerjaan" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">Magang</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">Full-time</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">Part-time</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">Freelance</label>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+
+                        <!-- REMOTE -->
+                        <div class="accordion-item p-3">
+                            <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                              <label class="form-check-label" for="flexSwitchCheckDefault">Bisa Kerja Remote</label>
+                            </div>
+                        </div>
+
+                        <!-- KOTA -->
+                        <div class="accordion-item">
+                          <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                               Kota
+                            </button>
+                          </h2>
+                          <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">Jakarta, Indonesia</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">Surabaya, Indonesia</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">Bandung, Indonesia</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">Semarang, Indonesia</label>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <!-- PENGALAMAN -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePengalaman" aria-expanded="false" aria-controls="collapsePengalaman">
+                                 Pengalaman
+                              </button>
+                            </h2>
+                            <div id="collapsePengalaman" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">Kurang dari setahun</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">1 - 3tahun</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">3 - 5 tahun</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">5 - 10tahun</label>
+                                  </div>
+                                  <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                      <label class="form-check-label" for="flexCheckDefault">Lebih dari 10 tahun</label>
+                                  </div>
+
+                                  <div class="form-check form-switch mt-3">
+                                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                    <label class="form-check-label" for="flexSwitchCheckDefault">Selain pekerjaan tanpa pengalaman</label>
+                                  </div>
+                              </div>
+                            </div>
+                        </div>
+
+                        <!-- DIPERBARUI -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiperbarui" aria-expanded="false" aria-controls="collapseDiperbarui">
+                                 Terakhir Diperbarui
+                              </button>
+                            </h2>
+                            <div id="collapseDiperbarui" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">24 Jam terakhir</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">Seminggu terakhir</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">Sebulan terakhir</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                    <label class="form-check-label" for="flexRadioDefault1">Kapanpun</label>
+                                </div>
+                                  
+                              </div>
+                            </div>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JOB RESULT -->
+            <div class="col-lg-9">
+                <div class="row g-4" id="jobresult">
+
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="header d-flex justify-content-start align-items-center">
+                                    <img src="https://images.glints.com/unsafe/53x0/glints-dashboard.s3.amazonaws.com/images/logo.png" alt="Bootstrap" width="48" height="48">
+                                    <div class="title ms-3 w-100">
+                                        <h5 class="card-title">Software Engineer</h5>
+                                        <a href="#" class="card-link text-decoration-none">PT. BUMN Negara</a>
+                                    </div>
+                                    <div class="title-info d-flex flex-column gap-2">
+                                        <h5><span class="badge rounded-0" style="background-color: rgb(255, 160, 59);">Hot Job <i class="fa-solid fa-star"></i></span></h5>
+                                        <a href="#" class="align-self-end text-decoration-none"><i class="fa-regular fa-bookmark fa-lg" style="margin-right: 30px;"></i></a>
+                                    </div>
+                                </div>
+
+                                <div class="description mt-2">
+                                    <p><i class="fa-solid fa-location-dot"></i> Yogyakarta</p>
+                                    <p><i class="fa-solid fa-dollar"></i> IDR 2.500.000 - 4.000.000</p>    
+                                    <p><i class="fa-solid fa-briefcase"></i> 1 - 3 tahun</p>    
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent border-light py-3">
+                                <span><i class="fa-regular fa-clock"></i> Diperbarui 7 hari yang lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="container-fluid text-white m-0 p-0 mt-5 px-3 py-5" id="footer">
+        <div class="row">
+            <div class="col-lg-5">
+                <img src="https://glints.com/_next/static/chunks/node_modules/glints-aries/assets/image/glints-logo-white.82575cc44c4e3ee1.svg" width="140" height="150" alt="" srcset="">
+                <p>Glints adalah ekosistem talenta terdepan di kawasan Asia Tenggara. Misi kami adalah mewujudkan 120 juta profesional di kawasan untuk terus mengembangkan karirnya dan memberdayakan organisasi sehingga dapat menemukan kandidat yang tepat dari penjuru Asia Tenggara. Secara resmi berdiri di Singapura pada tahun 2015 di Singapura, Glints telah memberdayakan lebih dari 4 juta talenta dan 50.000 organisasi untuk mewujudkan potensi terbaiknya. Hari ini, kami berada di garis depan pemberdayaan kandidat sebagai startup dengan pertumbuhan tercepat khususnya kategori pengembangan karir dan rekrutmen. Saat ini, Glints beroperasi di Indonesia, Malaysia, Singapura, Vietnam Filipina dan Taiwan.</p>
+                <p><strong>Layanan Pengaduan Konsumen</strong></p>
+                <p>Company Address: Jl. Hang Lekiu KM. 2 Teluk Mata Ikan, Desa/Kelurahan Sambau, Kec. Nongsa, Kota Batam, Provinsi Kepulauan Riau, Kode Pos: 29465</p>
+                <p>E-mail Address: hi@glints.com</p>
+                <p>DIREKTORAT JENDERAL PERLINDUNGAN KONSUMEN DAN TERTIB NIAGA KEMENTERIAN PERDAGANGAN REPUBLIK INDONESIA Nomor Kontak WhatsApp : 0853-1111-1010</p>
+            </div>
+            <div class="col-lg-2">
+                <h6>Perusahaan</h6>
+                <ul class="list-group" id="listfooter">
+                    <li class="list-group-item">About Us</li>
+                    <li class="list-group-item">Tim Kami</li>
+                    <li class="list-group-item">Hired Blog</li>
+                    <li class="list-group-item">Inside Glints</li>
+                    <li class="list-group-item">Tech Blog</li>
+                    <li class="list-group-item">TCareers</li>
+                    <li class="list-group-item">Report Vulnerability</li>
+                    <li class="list-group-item">Syarat & Ketentuan</li>
+                  </ul>
+            </div>
+            <div class="col-lg-3">
+                <h6>Temukan Lowongan Berdasarkan</h6>
+                <ul class="list-group"  id="listfooter">
+                    <li class="list-group-item">Help Center</li>
+                    <li class="list-group-item">Lokasi Pekerjaan</li>
+                    <li class="list-group-item">Nama Perusahaan</li>
+                    <li class="list-group-item">Kategori Pekerjaan</li>
+                    <li class="list-group-item">Posisi Pekerjaan</li>
+                    <li class="list-group-item">Paling Banyak Dicari</li>
+                    <li class="list-group-item">Lowongan Kerja Populer</li>
+                  </ul>
+            </div>
+            <div class="col-lg-2">
+                <h6>Bussiness Solution</h6>
+                <ul class="list-group"  id="listfooter">
+                    <li class="list-group-item">For Employers</li>
+                    <li class="list-group-item">HR Tips</li>
+                    <li class="list-group-item">Glints Platform</li>
+                    <li class="list-group-item">Perekrutan</li>
+                    <li class="list-group-item">Bakat Terkelola</li>
+                  </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  </body>
+</html>
