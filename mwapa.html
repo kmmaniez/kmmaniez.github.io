@@ -42,20 +42,26 @@
         p{
             display: none;
         }
+        #intro{
+            display: block;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <p>Mang EAK <br>&#129325 &#128514 &#128523 &#129323</p>
+    <p>Mw ajh lu, EAK<br>&#129325 &#128514 &#128523 &#129323</p>
     <audio id="bgm" src="bgmusic.mp3"></audio>
 </body>
 <script>
     window.onload = function(){
         const body = document.getElementsByTagName('body')[0];
+        const intro = document.getElementById('intro');
         const audio =  document.getElementsByTagName('audio')[0];
-        body.addEventListener('click', () => {
+        intro.addEventListener('click', () => {
             body.classList.add('active')
             audio.autoplay = true;
             audio.currentTime = 167;
+            intro.style.display = 'none';
         })
     }
 </script>
