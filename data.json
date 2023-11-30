@@ -1,0 +1,32 @@
+[
+    {
+        "title":"Sistem Informasi Akademik",
+        "image":"bg.jpg",
+        "description":"build a system information academic for"
+    },
+    {
+        "title":"Company Profile & Monitoring LPK Kapal",
+        "image":"ship.jpg",
+        "description":"Create monitoring system, company profile and report system."
+    },
+    {
+        "title":"Company Profile CV Nusa",
+        "image":"view.jpg",
+        "description":"Company profile with construction theme."
+    },
+    {
+        "title":"FGID Store System",
+        "image":"ship.jpg",
+        "description":"Build a online store with payment gateway & withdrawal for users."
+    },
+    {
+        "title":"Pendaftaran Tk Sahabat Bekasi",
+        "image":"bg.jpg",
+        "description":"Integration with payment gateway for students registration."
+    },
+    {
+        "title":"Disposisi Surat Desa",
+        "image":"cook.jpg",
+        "description":"Create mini disposisi letter system for goverment."
+    }
+]
