@@ -51,8 +51,7 @@
     </style>
 </head>
 <body>
-    <div id="intro">Coba klik</div>
-    <p>mangeaakk<br>&#129325 &#128514 &#128523 &#129323</p>
+    <div id="intro">dont click</div>
     <audio id="bgm" src="bgmusic.mp3"></audio>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
 </body>
@@ -65,7 +64,7 @@
         intro.addEventListener('click', () => {
             body.classList.add('active')
             var sound = new Howl({
-                src: ['bgmusic.mp3'],
+                src: ['music.mp3'],
                 loop: true
             });
 

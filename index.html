@@ -21,12 +21,12 @@
 
             section {
                 height: 100vh;
-                padding: 0 clamp(4rem, 12vw, 20rem);
+                /* padding: 0 clamp(4rem, 12vw, 20rem); */
                 display: grid;
                 place-content: center;
             }
             section p {
-                font-size: clamp(2rem, 5vw, 8rem);
+                /* font-size: clamp(2rem, 5vw, 8rem); */
             }
             section:nth-of-type(1) {
                 border-bottom: 1px solid black;
@@ -40,6 +40,26 @@
                 color: white;
                 /* background-color: #dddddd; */
             }
+            @media (width <= 800px){
+                section{
+                    padding: 0 1rem;
+                    position: relative;
+                    /* overflow-x: hidden; */
+                }
+                p{
+                    font-size: 1.8rem;
+                    z-index: 1;
+                }
+                /* img{
+                    width: 360px;
+                    height: 340px;
+                    bottom: 0;
+                    left: 0;
+                    margin: 0 auto;
+                    position: absolute;
+                    transition: all 100ms linear;
+                } */
+            }
         </style>
     </head>
     <body>
@@ -49,25 +69,25 @@
 
         <section>
             <p class="reveal-type" data-bg-color="#cccccc" data-fg-color="teal">
-                Exploring animation trends, and try to build. Even it looks like a s*ht.
+                I don't love studying,<br> I hate studying,<br>I like learning.
             </p>
         </section>
 
-        <section>
+        <!-- <section>
             <p
                 class="reveal-type"
                 data-bg-color="#ffa59c"
                 data-fg-color="#fff"
             >
-                Who am i ? <br>Full stucks developers<br>Cat lovers<br>Manchester united fans <br>#GGMU
+                Who am i ?? <br>Full stucks developers<br>Design addict<br>Manchester united fans <br>#GGMU
             </p>
-        </section>
+        </section> -->
 
         <section>
-            <p class="reveal-type" data-bg-color="#353535" data-fg-color="#eaeaea">
-                Enjoy the moment and <br>be gratefull for what you had-<br>Life is too short, make it<br> meaningfull.
+            <p class="reveal-type" data-bg-color="#ffa59c" data-fg-color="#fff">
+                Remember,<br> life is too short, make it<br> meaningfull.
             </p>
-            <small>@dizzalifa</small>
+            <!-- <img src="/couple.png" id="img" alt="" srcset=""> -->
         </section>
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -79,6 +99,8 @@
         gsap.registerPlugin(ScrollTrigger);
 
         const splitTypes = document.querySelectorAll(".reveal-type");
+
+        const img = document.querySelector('#img');
 
         splitTypes.forEach((char, i) => {
             const bg = char.dataset.bgColor;
